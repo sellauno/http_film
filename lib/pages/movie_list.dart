@@ -11,6 +11,7 @@ class _MovieListState extends State<MovieList> {
   int moviesCount;
   List movies;
   HttpService service;
+  String imgPath = 'https://image.tmdb.org/t/p/w500';
 
   Future initialize() async {
     movies = [];
@@ -39,16 +40,29 @@ class _MovieListState extends State<MovieList> {
             return Card(
               color: Colors.white,
               elevation: 2.0,
-              child: ListTile(
-                title: Text(movies[position].title),
-                subtitle: Text(
-                  'Rating = ' + movies[position].voteAverage.toString(),
-                ),
-                onTap: (){
-                  MaterialPageRoute route = MaterialPageRoute(
-                    builder: (_) => MovieDetail(movies[position]));
-                    Navigator.push(context, route);
-                },
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.network(
+                      imgPath + movies[position].posterPath,
+                      width: 100,
+                    ),
+                  ),
+                  Expanded(
+                    child: ListTile(
+                      title: Text(movies[position].title),
+                      subtitle: Text(
+                        'Rating = ' + movies[position].voteAverage.toString() + '/100',
+                      ),
+                      onTap: () {
+                        MaterialPageRoute route = MaterialPageRoute(
+                            builder: (_) => MovieDetail(movies[position]));
+                        Navigator.push(context, route);
+                      },
+                    ),
+                  ),
+                ],
               ),
             );
           }),
