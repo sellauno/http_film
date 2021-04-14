@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http_film/pages/movie_detail.dart';
 import 'package:http_film/service/http_service.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class MovieList extends StatefulWidget {
   @override
@@ -31,8 +32,10 @@ class _MovieListState extends State<MovieList> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFE0E0E0),
       appBar: AppBar(
         title: Text("Popular Movies"),
+        backgroundColor: Colors.black87,
       ),
       body: ListView.builder(
           itemCount: (this.moviesCount == null) ? 0 : this.moviesCount,
@@ -52,8 +55,24 @@ class _MovieListState extends State<MovieList> {
                   Expanded(
                     child: ListTile(
                       title: Text(movies[position].title),
-                      subtitle: Text(
-                        'Rating = ' + movies[position].voteAverage.toString() + '/100',
+                      subtitle: Padding(
+                        padding: const EdgeInsets.only(top:6.0),
+                        child: RatingBar.builder(
+                          ignoreGestures: true,
+                          initialRating: movies[position].voteAverage/10,
+                          direction: Axis.horizontal,
+                          allowHalfRating: true,
+                          itemCount: 10,
+                          itemPadding: EdgeInsets.symmetric(horizontal: 1.0),
+                          itemSize: 10,
+                          itemBuilder: (context, _) => Icon(
+                            Icons.star,
+                            color: Colors.amber
+                          ),
+                          onRatingUpdate: (rating) {
+                            print(rating);
+                          },
+                        ),
                       ),
                       onTap: () {
                         MaterialPageRoute route = MaterialPageRoute(

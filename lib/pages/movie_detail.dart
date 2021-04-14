@@ -3,12 +3,12 @@ import 'package:http_film/models/movie.dart';
 
 class MovieDetail extends StatelessWidget {
   final Movie movie;
+  String imgPath = "https://image.tmdb.org/t/p/w500";
 
   MovieDetail(this.movie);
 
   @override
   Widget build(BuildContext context) {
-    String imgPath = "https://image.tmbd.org/t/p/w500";
     String path;
     if (movie.posterPath != null) {
       path = imgPath + movie.posterPath;
@@ -20,6 +20,7 @@ class MovieDetail extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(movie.title),
+        backgroundColor: Colors.black87,
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -28,11 +29,18 @@ class MovieDetail extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(16),
                 height: height / 1.5,
-                child: Image.network(imgPath+movie.posterPath, width: 100,),
+                child: Image.network(path),
               ),
               Container(
-                child: Image.network(imgPath+movie.posterPath, width: 100,),
-                padding: EdgeInsets.only(left: 16, right: 16),
+                padding: EdgeInsets.only(left: 20, right: 16, top: 10, bottom: 10),
+                child: Text(
+                  movie.title,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+              ),
+              Container(
+                child: Text(movie.overview),
+                padding: EdgeInsets.only(left: 20, right: 16),
               ),
             ],
           ),
