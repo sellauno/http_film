@@ -1,3 +1,11 @@
+# Screenshots
+
+- Movie List
+![screenshots](image/movielist.jpeg)
+
+- Movie Detail
+![screenshots](image/moviedetail.jpeg)
+
 # http_film
 
 A new Flutter project.
