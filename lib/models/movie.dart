@@ -4,6 +4,7 @@ class Movie{
   double voteAverage;
   String overview;
   String posterPath;
+  String backdropPath;
 
   Movie(this.id, this.title, this.voteAverage, this.overview, this.posterPath);
 
@@ -13,5 +14,6 @@ class Movie{
     this.voteAverage = parsedJson['vote_average'] * 10;
     this.overview = parsedJson['overview'];
     this.posterPath = parsedJson['poster_path'];
+    this.backdropPath = parsedJson['backdrop_path'];
   }
 } 

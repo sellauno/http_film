@@ -10,14 +10,22 @@ class MovieDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String path;
-    if (movie.posterPath != null) {
-      path = imgPath + movie.posterPath;
+    String poster;
+    if (movie.backdropPath != null) {
+      path = imgPath + movie.backdropPath;
     } else {
       path =
           'https:/images.freeimages.com/images/large-previews/5eb/movie-clapboard-1184339.jpg';
     }
+    if (movie.posterPath != null) {
+      poster = imgPath + movie.posterPath;
+    } else {
+      poster =
+          'https:/images.freeimages.com/images/large-previews/5eb/movie-clapboard-1184339.jpg';
+    }
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: Color(0xFF303030),
       appBar: AppBar(
         title: Text(movie.title),
         backgroundColor: Colors.black87,
@@ -28,18 +36,27 @@ class MovieDetail extends StatelessWidget {
             children: [
               Container(
                 padding: EdgeInsets.all(16),
-                height: height / 1.5,
+                height: height / 2,
                 child: Image.network(path),
               ),
               Container(
-                padding: EdgeInsets.only(left: 20, right: 16, top: 10, bottom: 10),
-                child: Text(
-                  movie.title,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                padding: EdgeInsets.only(left: 20, right: 16, bottom: 10),
+                child: Row(
+                  children: [
+                    Image.network(poster, width: 40),
+                    Text(
+                      "  "+movie.title,
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
+                    ),
+                  ],
                 ),
               ),
               Container(
-                child: Text(movie.overview),
+                child: Text(
+                  movie.overview,
+                  style: TextStyle(color: Colors.white),
+                ),
+                width: 450,
                 padding: EdgeInsets.only(left: 20, right: 16),
               ),
             ],

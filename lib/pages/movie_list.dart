@@ -49,29 +49,34 @@ class _MovieListState extends State<MovieList> {
                     padding: const EdgeInsets.all(8.0),
                     child: Image.network(
                       imgPath + movies[position].posterPath,
-                      width: 100,
+                      width: 60,
                     ),
                   ),
                   Expanded(
                     child: ListTile(
                       title: Text(movies[position].title),
                       subtitle: Padding(
-                        padding: const EdgeInsets.only(top:6.0),
-                        child: RatingBar.builder(
-                          ignoreGestures: true,
-                          initialRating: movies[position].voteAverage/10,
-                          direction: Axis.horizontal,
-                          allowHalfRating: true,
-                          itemCount: 10,
-                          itemPadding: EdgeInsets.symmetric(horizontal: 1.0),
-                          itemSize: 10,
-                          itemBuilder: (context, _) => Icon(
-                            Icons.star,
-                            color: Colors.amber
-                          ),
-                          onRatingUpdate: (rating) {
-                            print(rating);
-                          },
+                        padding: const EdgeInsets.only(top:6.0, right: 5.0),
+                        child: Row(
+                          children: [
+                            RatingBar.builder(
+                              ignoreGestures: true,
+                              initialRating: movies[position].voteAverage/20,
+                              direction: Axis.horizontal,
+                              allowHalfRating: true,
+                              itemCount: 5,
+                              itemPadding: EdgeInsets.symmetric(horizontal: 1.0),
+                              itemSize: 12,
+                              itemBuilder: (context, _) => Icon(
+                                Icons.star,
+                                color: Colors.amber
+                              ),
+                              onRatingUpdate: (rating) {
+                                print(rating);
+                              },
+                            ),
+                            Text("  "+(movies[position].voteAverage/10).toString()+"/10")
+                          ],
                         ),
                       ),
                       onTap: () {
